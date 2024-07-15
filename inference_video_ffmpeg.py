@@ -15,6 +15,8 @@ import subprocess
 
 warnings.filterwarnings("ignore")
 
+FRAMES_TO_SKIP = []
+
 NUMBER_OF_WRITE_THREADS = 4
 PNG_COMPRESSION = 3 # 0-min 9-max
 JPEG_QUALITY = 100 # 0-min 100-max
@@ -44,19 +46,17 @@ parser.add_argument('--multi', dest='multi', type=int, default=2)
 args = parser.parse_args()
 assert (args.video is not None or args.img is not None)
 assert (args.jpg != args.png or not args.jpg)
-assert (args.output is not None and args.temp is not None)
+assert (args.temp is not None)
 if args.UHD and args.scale == 1.0:
     args.scale = 0.5
 assert args.scale in [0.25, 0.5, 1.0, 2.0, 4.0]
-if args.img is not None:
-    args.png = True
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 torch.set_grad_enabled(False)
 if torch.cuda.is_available():
     torch.backends.cudnn.enabled = True
     torch.backends.cudnn.benchmark = True
-    if(args.fp16):
+    if (args.fp16):
         torch.set_default_tensor_type(torch.cuda.HalfTensor)
 
 try:
@@ -71,18 +71,18 @@ print("Loaded 3.x/4.x HD model.")
 model.eval()
 model.device()
 
+frame_counter = 0
+lastframe = None
 if not args.video is None:
     videoCapture = cv2.VideoCapture(args.video)
     fps = videoCapture.get(cv2.CAP_PROP_FPS)
     tot_frame = videoCapture.get(cv2.CAP_PROP_FRAME_COUNT)
     videoCapture.release()
-    if args.fps is None:
-        fpsNotAssigned = True
-        args.fps = fps * args.multi
-    else:
-        fpsNotAssigned = False
+    args.fps = fps * args.multi
     videogen = skvideo.io.vreader(args.video)
-    lastframe = next(videogen)
+    while frame_counter <= args.start_frame:
+        lastframe = next(videogen)
+        frame_counter += 1
     fourcc = cv2.VideoWriter_fourcc(*'FFV1')
     video_path_wo_ext, ext = os.path.splitext(args.video)
     print('{}.{}, {} frames in total, {}FPS to {}FPS'.format(video_path_wo_ext, args.ext, tot_frame, fps, args.fps))
@@ -94,15 +94,18 @@ else:
     tot_frame = len(videogen)
     videogen.sort(key= lambda x:int(x[:-4]))
     lastframe = cv2.imread(os.path.join(args.img, videogen[0]), cv2.IMREAD_UNCHANGED)[:, :, ::-1].copy()
+    frame_counter += 1
     videogen = videogen[1:]
 h, w, _ = lastframe.shape
-if not os.path.exists(args.output):
-    os.mkdir(args.output)
 
 if args.jpg:
+    if not os.path.exists(args.temp):
+        os.mkdir(args.temp)
     img_out_ext = 'jpg'
     img_out_params = [cv2.IMWRITE_JPEG_QUALITY, JPEG_QUALITY]
 elif args.png:
+    if not os.path.exists(args.temp):
+        os.mkdir(args.temp)
     img_out_ext = 'png'
     img_out_params = [cv2.IMWRITE_PNG_COMPRESSION, PNG_COMPRESSION]
 
@@ -119,6 +122,7 @@ def buffer_to_ffmpeg(user_args, write_buffer):
         '-pix_fmt', 'rgb24',
         '-r', f'{user_args.fps}',                  # Replace with your frame rate
         '-i', '-',                  # Read input from stdin
+        # '-vf', f'crop={3840}:{2160}:{(w-3840)//2}:{0}',
         '-r', f'{output_fps}',
         '-pix_fmt', 'yuv420p',
         '-c:v', 'libx265',
@@ -133,7 +137,7 @@ def buffer_to_ffmpeg(user_args, write_buffer):
         if frame is None:
             break
 
-        #yuv_frame = cv2.cvtColor(frame[1], cv2.COLOR_RGB2YUV_I420)
+        # yuv_frame = cv2.cvtColor(frame[1], cv2.COLOR_RGB2YUV_I420)
 
         # Write frame to ffmpeg stdin
         ffmpeg_process.stdin.write(frame[1].tobytes())
@@ -144,7 +148,7 @@ def buffer_to_ffmpeg(user_args, write_buffer):
 
 
 def clear_write_buffer(user_args, write_buffer):
-    os.chdir(user_args.output)
+    os.chdir(user_args.temp)
     while True:
         item = write_buffer.get()
         if item is None:
@@ -156,11 +160,14 @@ def clear_write_buffer(user_args, write_buffer):
 
 def build_read_buffer(user_args, read_buffer, videogen):
     try:
-        for frame_id, frame in enumerate(videogen):
-            if not user_args.img is None:
+        frame_id = user_args.start_frame + 1
+        for frame in videogen:
+            if user_args.img is not None:
                 frame = cv2.imread(os.path.join(user_args.img, frame), cv2.IMREAD_UNCHANGED)[:, :, ::-1].copy()
-            if user_args.start_frame <= frame_id and user_args.end_frame > frame_id:
-                read_buffer.put(frame)
+            elif user_args.end_frame <= frame_id:
+                break
+            read_buffer.put(frame)
+            frame_id += 1
     except:
         pass
     read_buffer.put(None)
@@ -195,9 +202,8 @@ def pad_image(img):
 detector = None
 scene_cut_frames = []
 
-if args.ogv is not None:
-    detector = SceneCutDetector(args.ogv)
-if detector and args.scene_detect:
+detector = SceneCutDetector(args.ogv)
+if args.scene_detect:
     detector.detect_scene_cuts()
     detector.user_correction()
     scene_cut_frames = detector.get_scene_cut_frames()
@@ -208,23 +214,21 @@ tmp = max(128, int(128 / args.scale))
 ph = ((h - 1) // tmp + 1) * tmp
 pw = ((w - 1) // tmp + 1) * tmp
 padding = (0, pw - w, 0, ph - h)
-#pbar = tqdm(total=tot_frame)
+# pbar = tqdm(total=tot_frame)
 
 write_buffer = Queue(maxsize=80)
 read_buffer = Queue(maxsize=20)
 _thread.start_new_thread(build_read_buffer, (args, read_buffer, videogen))
 
-'''
-for i in range(NUMBER_OF_WRITE_THREADS):
-    _thread.start_new_thread(clear_write_buffer, (args, write_buffer))
-'''
-
-_thread.start_new_thread(buffer_to_ffmpeg, (args, write_buffer))
+if args.jpg or args.png:
+    for i in range(NUMBER_OF_WRITE_THREADS):
+        _thread.start_new_thread(clear_write_buffer, (args, write_buffer))
+else:
+    _thread.start_new_thread(buffer_to_ffmpeg, (args, write_buffer))
 
 I1 = torch.from_numpy(np.transpose(lastframe, (2,0,1))).to(device, non_blocking=True).unsqueeze(0).float() / 255.
 I1 = pad_image(I1)
 
-frame_counter = args.start_frame + 1
 out_counter = 0
 while True:
     frame = read_buffer.get()
@@ -233,6 +237,13 @@ while True:
     I0 = I1
     I1 = torch.from_numpy(np.transpose(frame, (2,0,1))).to(device, non_blocking=True).unsqueeze(0).float() / 255.
     I1 = pad_image(I1)
+
+    if frame_counter in FRAMES_TO_SKIP:
+        for i in range(args.multi):
+            write_buffer.put([out_counter, lastframe])
+            out_counter += 1
+        frame_counter += 1
+        continue
 
     if frame_counter in scene_cut_frames:
         output = []
@@ -260,6 +271,7 @@ while True:
     frame_counter += 1
 
 write_buffer.put([out_counter, lastframe])
+write_buffer.put(None)
 
 import time
 while(not write_buffer.empty()):
