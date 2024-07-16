@@ -1,0 +1,25 @@
+{
+    "temp_folder": "C:\\Users\\ExampleUser\\TempFolder",
+    "output_folder": "C:\\Users\\ExampleUser\\OutFolder",
+    "max_fps": 120,
+    "videos": [
+      {
+        "video_path": "C:\\Users\\ExampleUser\\Videos\\video1.mp4",
+        "multi_factor": 3,
+        "scene_detect": true,
+        "original_video": "C:\\Users\\ExampleUser\\Videos\\original_video1.mp4",
+        "start_frame": 0,
+        "end_frame": 1500
+      },
+      {
+        "video_path": "C:\\Users\\ExampleUser\\Videos\\video2.mp4",
+        "multi_factor": 2,
+        "scene_detect": false
+      },
+      {
+        "video_path": "C:\\Users\\ExampleUser\\Videos\\video3.mp4",
+        "multi_factor": 4,
+        "scene_detect": false
+      }
+    ]
+  }

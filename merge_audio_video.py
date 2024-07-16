@@ -3,6 +3,7 @@ import warnings
 import os
 import cv2
 import subprocess
+from math import ceil
 
 warnings.filterwarnings("ignore")
 
@@ -33,6 +34,8 @@ args = parser.parse_args()
 if not args.video:
     exit()
 assert (args.temp is not None and args.output is not None)
+if args.ogv is None:
+    args.ogv = args.video
 
 videoCapture = cv2.VideoCapture(args.video)
 fps = videoCapture.get(cv2.CAP_PROP_FPS)
@@ -40,7 +43,7 @@ videoCapture.release()
 
 base_name = os.path.basename(args.video)
 file_name, _ = os.path.splitext(base_name)
-file_name += ' ' + str(int(fps)) + 'fpsUP.' + 'mp4'
+file_name += ' ' + str(ceil(fps)) + 'fpsUP.' + 'mp4'
 
 output_video = os.path.join(args.output, file_name)
 
@@ -58,6 +61,7 @@ command = [
 
 try:
     subprocess.run(command, check=True)
+    os.remove(args.temp)
     print(f"Successfully merged video from {args.temp} and audio from {args.ogv} into {output_video}")
 except subprocess.CalledProcessError as e:
     print(f"Error occurred: {e}")

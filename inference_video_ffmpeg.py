@@ -50,6 +50,8 @@ assert (args.temp is not None)
 if args.UHD and args.scale == 1.0:
     args.scale = 0.5
 assert args.scale in [0.25, 0.5, 1.0, 2.0, 4.0]
+if args.ogv is None:
+    args.ogv = args.video
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 torch.set_grad_enabled(False)
@@ -247,16 +249,16 @@ while True:
 
     if frame_counter in scene_cut_frames:
         output = []
-        if args.fancy_blend:
-            step = 1 / args.multi
-            alpha = 0
-            for i in range(args.multi - 1):
-                alpha += step
-                beta = 1-alpha
-                output.append(torch.from_numpy(np.transpose((cv2.addWeighted(frame[:, :, ::-1], alpha, lastframe[:, :, ::-1], beta, 0)[:, :, ::-1].copy()), (2,0,1))).to(device, non_blocking=True).unsqueeze(0).float() / 255.)
-        else:
-            for i in range(args.multi - 1):
-                output.append(I0)
+        step = 1 / args.multi
+        alpha = 0
+        for i in range(args.multi - 1):
+            alpha += step
+            beta = 1-alpha
+            output.append(torch.from_numpy(np.transpose((cv2.addWeighted(frame[:, :, ::-1], alpha, lastframe[:, :, ::-1], beta, 0)[:, :, ::-1].copy()), (2,0,1))).to(device, non_blocking=True).unsqueeze(0).float() / 255.)
+        ''' Repeat Blend
+        for i in range(args.multi - 1):
+            output.append(I0)
+        '''
     else:
         output = make_inference(I0, I1, args.multi-1)
 
