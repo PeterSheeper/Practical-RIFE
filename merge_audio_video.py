@@ -24,6 +24,7 @@ parser.add_argument('--scale', dest='scale', type=float, default=1.0, help='Try 
 parser.add_argument('--skip', dest='skip', action='store_true', help='whether to remove static frames before processing')
 parser.add_argument('--fps', dest='fps', type=int, default=None)
 parser.add_argument('--max_fps', dest='max_fps', type=int, default=120)
+parser.add_argument('--min_duration', dest='min_duration', type=int, default=0, help='duration to loop in seconds')
 parser.add_argument('--png', dest='png', action='store_true', help='whether to vid_out png format vid_outs')
 parser.add_argument('--jpg', dest='jpg', action='store_true', help='whether to vid_out jpg format vid_outs')
 parser.add_argument('--ext', dest='ext', type=str, default='mp4', help='vid_out video extension')
@@ -39,6 +40,9 @@ if args.ogv is None:
 
 videoCapture = cv2.VideoCapture(args.video)
 fps = videoCapture.get(cv2.CAP_PROP_FPS)
+total_frames = videoCapture.get(cv2.CAP_PROP_FRAME_COUNT)
+video_duration = total_frames / fps
+loop_amount = ceil(args.min_duration / video_duration) - 1
 videoCapture.release()
 
 base_name = os.path.basename(args.video)
@@ -60,9 +64,15 @@ command = [
     output_video
 ]
 
+if loop_amount >= 1 and args.min_duration > 0:
+    command.insert(2, str(loop_amount))
+    command.insert(2, '-stream_loop')
+    command.insert(6, str(loop_amount))
+    command.insert(6, '-stream_loop')
+
 try:
     subprocess.run(command, check=True)
-    os.remove(args.temp)
+    #os.remove(args.temp)
     print(f"Successfully merged video from {args.temp} and audio from {args.ogv} into {output_video}")
 except subprocess.CalledProcessError as e:
     print(f"Error occurred: {e}")

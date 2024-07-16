@@ -25,11 +25,12 @@ def create_interp_command(video, temp_file, max_fps_val):
     return interp_command
 
 
-def create_merge_command(video, output_folder, temp_file):
+def create_merge_command(video, output_folder, temp_file, min_duration_val):
     video_path = f"--video={video['video_path']}"
     output_path = f"--output={output_folder}"
+    min_duration = f"--min_duration={min_duration_val}"
 
-    merge_command = ['python3.11.exe', 'merge_audio_video.py', video_path, output_path, temp_file]
+    merge_command = ['python3.11.exe', 'merge_audio_video.py', video_path, output_path, temp_file, min_duration]
 
     if 'original_video' in video:
         merge_command.append(f"--ogv={video['original_video']}")
@@ -47,6 +48,7 @@ def run_command(command):
 
 
 max_fps_val = json_data['max_fps']
+min_duration_val = json_data['min_duration']
 output_folder = json_data['output_folder']
 temp_folder = json_data['temp_folder']
 
@@ -60,5 +62,5 @@ for id, video in enumerate(json_data['videos']):
     if 'start_frame' in video and video['start_frame'] > 0:
         continue
 
-    merge_command = create_merge_command(video, output_folder, temp_file)
+    merge_command = create_merge_command(video, output_folder, temp_file, min_duration_val)
     run_command(merge_command)
