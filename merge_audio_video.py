@@ -49,6 +49,7 @@ output_video = os.path.join(args.output, file_name)
 
 command = [
     'ffmpeg',
+    '-y',
     '-i', args.temp,
     '-i', args.ogv,
     '-c:v', 'copy',

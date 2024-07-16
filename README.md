@@ -1,7 +1,7 @@
-# Practical-RIFE 
-**[V4.0 Promotional Video (宣传视频）](https://www.bilibili.com/video/BV1J3411t7qT?p=1&share_medium=iphone&share_plat=ios&share_session_id=7AE3DA72-D05C-43A0-9838-E2A80885BD4E&share_source=QQ&share_tag=s_i&timestamp=1639643780&unique_k=rjqO0EK)**  
+# Practical-RIFE
+**[V4.0 Promotional Video (宣传视频）](https://www.bilibili.com/video/BV1J3411t7qT?p=1&share_medium=iphone&share_plat=ios&share_session_id=7AE3DA72-D05C-43A0-9838-E2A80885BD4E&share_source=QQ&share_tag=s_i&timestamp=1639643780&unique_k=rjqO0EK)**
 
-  **Use this project on Google Colab for free! Check out the [Practical-RIFE Colab Notebook](https://colab.research.google.com/drive/1BZmGSq15O4ZU5vPfzkv7jFNYahTm6qwT?usp=sharing).** 
+  **Use this project on Google Colab for free! Check out the [Practical-RIFE Colab Notebook](https://colab.research.google.com/drive/1BZmGSq15O4ZU5vPfzkv7jFNYahTm6qwT?usp=sharing).**
 
 2024.01 - We recently release new v4.7-4.14 models. In our tests, 4.14 makes a great improvement for animation scenes. 🎉
 
@@ -11,7 +11,7 @@ This project is based on [RIFE](https://github.com/hzwer/arXiv2020-RIFE) and [SA
 
 **[SVFI (中文)](https://github.com/YiWeiHuang-stack/Squirrel-Video-Frame-Interpolation) | [RIFE-App](https://grisk.itch.io/rife-app) | [FlowFrames](https://nmkd.itch.io/flowframes) | [Drop frame fixer and FPS converter](https://github.com/may-son/RIFE-FixDropFrames-and-ConvertFPS)**
 
-Thanks to [SVFI team](https://github.com/Justin62628/Squirrel-RIFE) to support model testing on Animation. 
+Thanks to [SVFI team](https://github.com/Justin62628/Squirrel-RIFE) to support model testing on Animation.
 
 ## Frame Interpolation
 ### Model List
@@ -23,7 +23,7 @@ The content of these links is under the same MIT license as this project. **lite
 
 4.15 - 2024.03.11 | [Google Drive](https://drive.google.com/file/d/1xlem7cfKoMaiLzjoeum8KIQTYO-9iqG5/view?usp=sharing) | [百度网盘](https://pan.baidu.com/s/1IGNIX7JXGUwI_tfoafYHqA?pwd=bg0b) || [4.15.lite](https://drive.google.com/file/d/1BoOF-qSEnTPDjpKG1sBTa6k7Sv5_-k7z/view?usp=sharing) || 4.14 - 2024.01.08 | [Google Drive](https://drive.google.com/file/d/1BjuEY7CHZv1wzmwXSQP9ZTj0mLWu_4xy/view?usp=share_link) | [百度网盘](https://pan.baidu.com/s/1d-W64lRsJTqNsgWoXYiaWQ?pwd=xawa) || [4.14.lite](https://drive.google.com/file/d/1eULia_onOtRXHMAW9VeDL8N2_7z8J1ba/view?usp=share_link)
 
-4.13.1 - 2023.12.05 | [Google Drive](https://drive.google.com/file/d/1mj9lH6Be7ztYtHAr1xUUGT3hRtWJBy_5/view?usp=sharing) | [百度网盘](https://pan.baidu.com/s/1e0I-ERSYQThANP7BQmz3Vw?pwd=e2h8) || [4.13.lite](https://drive.google.com/file/d/1l3lH9QxQQeZVWtBpdB22jgJ-0kmGvXra/view?usp=sharing) || v4.12.2 - 2023.11.13 | [Google Drive](https://drive.google.com/file/d/1ZHrOBL217ItwdpUBcBtRE3XBD-yy-g2S/view?usp=share_link) | [百度网盘](https://pan.baidu.com/s/1zyAw-qZJsIsAyFOIZKumYQ?pwd=gwij) 
+4.13.1 - 2023.12.05 | [Google Drive](https://drive.google.com/file/d/1mj9lH6Be7ztYtHAr1xUUGT3hRtWJBy_5/view?usp=sharing) | [百度网盘](https://pan.baidu.com/s/1e0I-ERSYQThANP7BQmz3Vw?pwd=e2h8) || [4.13.lite](https://drive.google.com/file/d/1l3lH9QxQQeZVWtBpdB22jgJ-0kmGvXra/view?usp=sharing) || v4.12.2 - 2023.11.13 | [Google Drive](https://drive.google.com/file/d/1ZHrOBL217ItwdpUBcBtRE3XBD-yy-g2S/view?usp=share_link) | [百度网盘](https://pan.baidu.com/s/1zyAw-qZJsIsAyFOIZKumYQ?pwd=gwij)
 
 v4.11.1 - 2023.11.11 | [Google Drive](https://drive.google.com/file/d/1Dwbp4qAeDVONPz2a10aC2a7-awD6TZvL/view?usp=share_link) | [百度网盘](https://pan.baidu.com/s/1TZiZuCHaG4SKmxKrqbbBDQ?pwd=pw2i) || v4.10.1 - 2023.11.09 [Google Drive](https://drive.google.com/file/d/1WNot1qYBt05LUyY1O9Uwwv5_K8U6t8_x/view?usp=sharing) | [百度网盘](https://pan.baidu.com/s/19niopL-Qwu2qOydIB1pEBg?pwd=88kv)
 
@@ -31,11 +31,63 @@ v4.9.2 - 2023.11.01 | [Google Drive](https://drive.google.com/file/d/1UssCvbL8N-
 
 v4.7.1 - 2023.9.25 | [Google Drive](https://drive.google.com/file/d/1s2zMMIJrUAFLexktm1rWNhlIyOYJ3_ju/view?usp=sharing) | [百度网盘](https://pan.baidu.com/s/1Mc7bvkVWMUG9F0Gqb_Vcpg?pwd=848u) || v4.6 - 2022.9.26 | [Google Drive](https://drive.google.com/file/d/1EAbsfY7mjnXNa6RAsATj2ImAEqmHTjbE/view?usp=sharing) | [百度网盘](https://pan.baidu.com/s/1Oc1enSD7kGnoQda2MdPYsw?pwd=gtkf)
 
-v4.3 - 2022.8.17 | [Google Drive](https://drive.google.com/file/d/1xrNofTGMHdt9sQv7-EOG0EChl8hZW_cU/view?usp=sharing) | [百度网盘](https://pan.baidu.com/s/12AUAeZLZf5E1_Zx6WkS3xw?pwd=q83a) || v4.2 - 2022.8.10 | [Google Drive](https://drive.google.com/file/d/1JpDAJPrtRJcrOZMMlvEJJ8MUanAkA-99/view?usp=sharing) | [百度网盘](https://pan.baidu.com/s/1Io4Z_QUaBv-O7dYERqQAPw?pwd=y3ad) 
+v4.3 - 2022.8.17 | [Google Drive](https://drive.google.com/file/d/1xrNofTGMHdt9sQv7-EOG0EChl8hZW_cU/view?usp=sharing) | [百度网盘](https://pan.baidu.com/s/12AUAeZLZf5E1_Zx6WkS3xw?pwd=q83a) || v4.2 - 2022.8.10 | [Google Drive](https://drive.google.com/file/d/1JpDAJPrtRJcrOZMMlvEJJ8MUanAkA-99/view?usp=sharing) | [百度网盘](https://pan.baidu.com/s/1Io4Z_QUaBv-O7dYERqQAPw?pwd=y3ad)
 
-v3.8 - 2021.6.17 | [Google Drive](https://drive.google.com/file/d/1O5KfS3KzZCY3imeCr2LCsntLhutKuAqj/view?usp=sharing) | [百度网盘](https://pan.baidu.com/s/1X-jpWBZWe-IQBoNAsxo2mA?pwd=kxr3) || v3.1 - 2021.5.17 | [Google Drive](https://drive.google.com/file/d/1xn4R3TQyFhtMXN2pa3lRB8cd4E1zckQe/view?usp=sharing) | [百度网盘](https://pan.baidu.com/s/1W4p_Ni04HLI_jTy45sVodA?pwd=64bz) 
+v3.8 - 2021.6.17 | [Google Drive](https://drive.google.com/file/d/1O5KfS3KzZCY3imeCr2LCsntLhutKuAqj/view?usp=sharing) | [百度网盘](https://pan.baidu.com/s/1X-jpWBZWe-IQBoNAsxo2mA?pwd=kxr3) || v3.1 - 2021.5.17 | [Google Drive](https://drive.google.com/file/d/1xn4R3TQyFhtMXN2pa3lRB8cd4E1zckQe/view?usp=sharing) | [百度网盘](https://pan.baidu.com/s/1W4p_Ni04HLI_jTy45sVodA?pwd=64bz)
 
 [More Older Version](https://github.com/megvii-research/ECCV2022-RIFE/issues/41)
+
+### Run.bat file example
+
+```
+@echo off
+set inf=99999999999999999
+
+set INPUT_VIDEO=D:\example.mp4
+set ORIGINAL_VIDEO=%INPUT_VIDEO%
+set OUT_FOLDER=X:\out_folder
+set TEMP_FILE=E:\temp_interp_video.mp4
+set INTERPOLATION=4
+set MAX_FPS=120
+set START_FRAME=0
+set END_FRAME=%inf%
+set MERGE_SOUND=0
+
+python3.11 inference_video_ffmpeg.py --multi=%INTERPOLATION% --video="%INPUT_VIDEO%" --output="%OUT_FOLDER%" --temp="%TEMP_FILE%" --ogv="%ORIGINAL_VIDEO%" --max_fps=%MAX_FPS% --start_frame=%START_FRAME% --end_frame=%END_FRAME% --fancy_blend --scene_detect
+if "%MERGE_SOUND%"=="0" goto :skip_line
+python3.11 merge_audio_video.py --video="%INPUT_VIDEO%" --output="%OUT_FOLDER%" --temp="%TEMP_FILE%" --ogv="%ORIGINAL_VIDEO%"
+:skip_line
+```
+
+### queue.json example
+
+```
+{
+    "temp_folder": "C:\\Users\\ExampleUser\\TempFolder",
+    "output_folder": "C:\\Users\\ExampleUser\\OutFolder",
+    "max_fps": 120,
+    "videos": [
+      {
+        "video_path": "C:\\Users\\ExampleUser\\Videos\\video1.mp4",
+        "multi_factor": 3,
+        "scene_detect": true,
+        "original_video": "C:\\Users\\ExampleUser\\Videos\\original_video1.mp4",
+        "start_frame": 0,
+        "end_frame": 1500
+      },
+      {
+        "video_path": "C:\\Users\\ExampleUser\\Videos\\video2.mp4",
+        "multi_factor": 2,
+        "scene_detect": false
+      },
+      {
+        "video_path": "C:\\Users\\ExampleUser\\Videos\\video3.mp4",
+        "multi_factor": 4,
+        "scene_detect": false
+      }
+    ]
+  }
+```
 
 ### Installation
 
@@ -47,9 +99,9 @@ pip3 install -r requirements.txt
 Download a model from the model list and put *.py and flownet.pkl on train_log/
 ### Run
 
-You can use our [demo video](https://drive.google.com/file/d/1i3xlKb7ax7Y70khcTcuePi6E7crO_dFc/view?usp=sharing) or your video. 
+You can use our [demo video](https://drive.google.com/file/d/1i3xlKb7ax7Y70khcTcuePi6E7crO_dFc/view?usp=sharing) or your video.
 ```
-python3 inference_video.py --multi=2 --video=video.mp4 
+python3 inference_video.py --multi=2 --video=video.mp4
 ```
 (generate video_2X_xxfps.mp4)
 ```
@@ -127,5 +179,5 @@ python3 inference_video_enhance.py --video=demo.mp4
 Optical Flow:
 [ARFlow](https://github.com/lliuz/ARFlow)  [pytorch-liteflownet](https://github.com/sniklaus/pytorch-liteflownet)  [RAFT](https://github.com/princeton-vl/RAFT)  [pytorch-PWCNet](https://github.com/sniklaus/pytorch-pwc)
 
-Video Interpolation: 
+Video Interpolation:
 [DVF](https://github.com/lxx1991/pytorch-voxel-flow)  [TOflow](https://github.com/Coldog2333/pytoflow)  [SepConv](https://github.com/sniklaus/sepconv-slomo)  [DAIN](https://github.com/baowenbo/DAIN)  [CAIN](https://github.com/myungsub/CAIN)  [MEMC-Net](https://github.com/baowenbo/MEMC-Net)   [SoftSplat](https://github.com/sniklaus/softmax-splatting)  [BMBC](https://github.com/JunHeum/BMBC)  [EDSC](https://github.com/Xianhang/EDSC-pytorch)  [EQVI](https://github.com/lyh-18/EQVI) [RIFE](https://github.com/hzwer/arXiv2020-RIFE)
